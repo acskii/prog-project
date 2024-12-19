@@ -14,7 +14,7 @@ typedef struct {
     unsigned int id, roomNum;
     unsigned long nationalId;
     int status;         // 0 for unconfirmed, 1 for confirmed
-    char mobile[11];    // Count mobile number digits
+    char mobile[12];    // Count mobile number digits
     Date checkIn;
     char customerName[50];
     int nights;
@@ -27,5 +27,10 @@ typedef struct {
     char category[20];  // Could be smaller
 } Room;
 
+typedef struct {
+    // length of string is debatable
+    char userName[50];
+    char pass[20];
+} Staff;
 
 #endif
