@@ -8,7 +8,8 @@
     - Andrew Sameh
 */
 
-Reservation* loadReservations(char* fileName);
-Room* loadRooms(char* fileName);
+Reservation* loadReservations(char* fileName, int* count);
+Room* loadRooms(char* fileName, int* count);
+Staff* loadStaff(char* fileName, int* count);
 
 #endif

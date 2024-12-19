@@ -5,14 +5,19 @@
 
 /* Andrew Sameh :) */
 
-Reservation* loadReservations(char* fileName) {
-    // Must be in same directory
+FILE* readFile(char* fileName) {
     FILE* fp = fopen(fileName, "r");
 
     if (!fp) {
         printf("%s doesn't exist in same directory", fileName);
-        return;
+        return NULL;
     }
+    return fp;
+}
+
+Reservation* loadReservations(char* fileName, int* count) {
+    // Must be in same directory
+    FILE* fp = readFile(fileName);
 
     Reservation reserves[100];
     int read = 0;
@@ -23,7 +28,7 @@ Reservation* loadReservations(char* fileName) {
 
         // Entire reading here
         read = fscanf(fp,
-        "%d,%d,%12[^,],%50[^,],%d,%d,%d-%d-%d,%200[^,],%11[^\n]\n",
+        "%d,%d,%11[^,],%49[^,],%d,%d,%d-%d-%d,%199[^,],%11[^\n]\n",
         &reserves[records].id,
         &reserves[records].roomNum,
         confirmStatus,
@@ -73,16 +78,12 @@ Reservation* loadReservations(char* fileName) {
         strcpy(returnArray[i].mobile, reserves[i].mobile);
     }
 
+    *count = records;
     return returnArray;
 }
 
-Room* loadRooms(char* fileName) {
-    FILE* fp = fopen(fileName, "r");
-
-    if (!fp) {
-        printf("%s doesn't exist in same directory", fileName);
-        return;
-    }
+Room* loadRooms(char* fileName, int* count) {
+    FILE* fp = readFile(fileName);
 
     Room rooms[100];
     int read = 0;
@@ -93,7 +94,7 @@ Room* loadRooms(char* fileName) {
 
         // Entire reading here
         read = fscanf(fp,
-        "%d %10[^ ] %20[^ ] %d[^\n]\n",
+        "%d %10[^ ] %19[^ ] %d[^\n]\n",
         &rooms[records].number,
         availableStatus,
         &rooms[records].category,
@@ -129,5 +130,50 @@ Room* loadRooms(char* fileName) {
         strcpy(returnArray[i].category, rooms[i].category);
     }
 
+    *count = records;
+    return returnArray;
+}
+
+Staff* loadStaff(char* fileName, int* count) {
+    FILE* fp = readFile(fileName);
+
+    Staff staff[100];
+    int read = 0;
+    int records = 0;    // For indexing and malloc
+
+    do {
+        // Entire reading here
+        read = fscanf(fp,
+        "%49[^ ] %19[^\n]\n",
+        &staff[records].userName,
+        &staff[records].pass
+        );
+
+        if (read == 2) {
+            // Successful record read
+            records++;
+        } else {
+            // Format error (missing commas)
+            /* This works perfectly unless there is an empty line at the end of the txt fiel
+                I have no clue on how to fix this...
+            */
+            printf("Incorrect file format, please fix file content");
+            return;
+        }
+    } while (!feof(fp));
+
+    fclose(fp);
+
+    // Creating array for returning
+    Staff* returnArray = malloc(sizeof(Staff)*records);
+    int i;
+
+    // Copying values from fscanf to new array
+    for (i = 0; i < records; i++) {
+        strcpy(returnArray[i].userName, staff[i].userName);
+        strcpy(returnArray[i].pass, staff[i].pass);
+    }
+
+    *count = records;
     return returnArray;
 }
