@@ -216,3 +216,35 @@ int writeReservations(char* fileName, Reservation* reservations, int num) {
     fclose(fp);
     return 1;
 }
+
+int writeRooms(char* fileName, Room* rooms, int num) {
+    FILE* fp = fopen(fileName, "w");
+    if (!fp) {
+        printf("File for writing doesn't exist, '%s'", fileName);   // This line could be done in main thread
+        return -1;
+    }
+
+    int i;
+    for (i = 0; i < num; ++i) {    
+        // Convert status of reservation into string
+        char statusStr[10];
+        if (rooms[i].status) {
+            strcpy(statusStr, "Reserved");
+        } else {
+            strcpy(statusStr, "Available");
+        }
+
+        fprintf(
+            fp,
+            "%d,%s,%s,%d",
+            rooms[i].number,
+            statusStr,
+            rooms[i].category,
+            rooms[i].price
+        );
+        
+        if (i < (num - 1)) fputc('\n', fp);
+    }
+    fclose(fp);
+    return 1;
+}
