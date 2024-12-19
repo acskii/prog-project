@@ -12,7 +12,7 @@ typedef struct {
 
 typedef struct {
     unsigned int id, roomNum;
-    unsigned long nationalId;
+    char nationalId[15];
     int status;         // 0 for unconfirmed, 1 for confirmed
     char mobile[12];    // Count mobile number digits
     Date checkIn;

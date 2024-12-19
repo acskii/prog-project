@@ -28,7 +28,7 @@ Reservation* loadReservations(char* fileName, int* count) {
 
         // Entire reading here
         read = fscanf(fp,
-        "%d,%d,%11[^,],%49[^,],%d,%d,%d-%d-%d,%199[^,],%11[^\n]\n",
+        "%d,%d,%11[^,],%49[^,],%14s,%d,%d-%d-%d,%199[^,],%11[^\n]\n",
         &reserves[records].id,
         &reserves[records].roomNum,
         confirmStatus,
@@ -69,7 +69,7 @@ Reservation* loadReservations(char* fileName, int* count) {
         returnArray[i].roomNum = reserves[i].roomNum;
         returnArray[i].status = reserves[i].status;
         strcpy(returnArray[i].customerName, reserves[i].customerName);
-        returnArray[i].nationalId = reserves[i].nationalId;
+        strcpy(returnArray[i].nationalId, reserves[i].nationalId);
         returnArray[i].nights = reserves[i].nights;
         returnArray[i].checkIn.day = reserves[i].checkIn.day;
         returnArray[i].checkIn.month = reserves[i].checkIn.month;
@@ -197,7 +197,7 @@ int writeReservations(char* fileName, Reservation* reservations, int num) {
 
         fprintf(
             fp,
-            "%d,%d,%s,%s,%ld,%d,%d-%d-%d,%s,%s",
+            "%d,%d,%s,%s,%s,%d,%d-%d-%d,%s,%s",
             reservations[i].id,
             reservations[i].roomNum,
             statusStr,
