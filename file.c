@@ -177,3 +177,42 @@ Staff* loadStaff(char* fileName, int* count) {
     *count = records;
     return returnArray;
 }
+
+int writeReservations(char* fileName, Reservation* reservations, int num) {
+    FILE* fp = fopen(fileName, "w");
+    if (!fp) {
+        printf("File for writing doesn't exist, '%s'", fileName);   // This line could be done in main thread
+        return -1;
+    }
+
+    int i;
+    for (i = 0; i < num; ++i) {    
+        // Convert status of reservation into string
+        char statusStr[12];
+        if (reservations[i].status) {
+            strcpy(statusStr, "comfirmed");
+        } else {
+            strcpy(statusStr, "uncomfirmed");
+        }
+
+        fprintf(
+            fp,
+            "%d,%d,%s,%s,%ld,%d,%d-%d-%d,%s,%s",
+            reservations[i].id,
+            reservations[i].roomNum,
+            statusStr,
+            reservations[i].customerName,
+            reservations[i].nationalId,
+            reservations[i].nights,
+            reservations[i].checkIn.day,
+            reservations[i].checkIn.month,
+            reservations[i].checkIn.year,
+            reservations[i].email,
+            reservations[i].mobile
+        );
+        
+        if (i < (num - 1)) fputc('\n', fp);
+    }
+    fclose(fp);
+    return 1;
+}
