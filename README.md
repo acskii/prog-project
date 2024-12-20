@@ -44,7 +44,7 @@ void main() {
     Reservation test = {
         .id = 143256,
         .roomNum = 1124,
-        .status = "confirmed",
+        .status = 1,
         .customerName = "Ahmed Mohamed",
         .nationalId = 90022800157646,
         .nights = 4,
