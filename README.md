@@ -2,6 +2,9 @@
 I will post my contributions here related to the Final Project for Programming-1 C course
 :)
 
+> [!NOTE]
+> Watch this [video](https://www.youtube.com/watch?v=idXIb84gsqU) to add header files in CodeBlocks!
+
 ## Examples
 ### main.c example
 ``` c
