@@ -27,6 +27,54 @@ void main() {
     printf("%s", v[1].email);    // mohamed.salah@gmail.com
 }
 ```
+### Reservation Sorting example
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include "types.h"
+#include "file.h"
+#include "sort.h"
+
+void main() {
+    Reservation test1 = {
+        .id = 143256,
+        .roomNum = 1124,
+        .status = 1,
+        .customerName = "Ahmed Mohamed",
+        .nationalId = "90022800157646",
+        .nights = 4,
+        .checkIn = {
+            .day = 29,
+            .month = 12,
+            .year = 2024
+        },
+        .email = "Ahmed.khaled@gmail.com",
+        .mobile = "01227653498"
+    };
+
+    Reservation test2 = {
+        .id = 142347,
+        .roomNum = 1110,
+        .status = 0,
+        .customerName = "Omar Ahmed",
+        .nationalId = "90022888157999",
+        .nights = 2,
+        .checkIn = {
+            .day = 10,
+            .month = 4,
+            .year = 2024
+        },
+        .email = "dummy.khaled@gmail.com",
+        .mobile = "01227333498"
+    };
+
+    Reservation arr[] = {test1, test2};
+    sortrByDate(arr, 2);    // Will alter array given
+
+    printf("Status of write function: %d", writeReservations("./reservations.txt", arr, 2));  // Status of write function: 1
+}
+```
+
 ### writeReservations example
 ``` c
 #include <stdio.h>
