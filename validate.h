@@ -7,6 +7,6 @@ int validateReserveId(int reservationId);
 int validateReserseStatus(char* status);
 int validateDate(Date date);
 int validateMobile(char* mobile);
-int validateEmail(char* email);
+//int validateEmail(char* email);  WORK IN PROGRESS
 
 #endif
