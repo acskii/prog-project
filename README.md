@@ -5,6 +5,47 @@ I will post my contributions here related to the Final Project for Programming-1
 > [!NOTE]
 > Watch this [video](https://www.youtube.com/watch?v=idXIb84gsqU) to add header files in CodeBlocks!
 
+## Validation
+> [!TIP]
+> Try these test cases, and add your own test cases as well
+> If any of these test cases fail, please inform me / suggest a solution yourself
+```c
+ // Test cases for date validation
+    Date leapYearDate = {29,2,2024};
+    Date normalWFebDate = {29,2,2023};
+    Date normalRFebDate = {28,2,2023};
+    Date above31 = {32,4,2023};
+    Date yearNegative = {32,4,-90};
+    Date dayNegative = {32,-4,90};
+    Date monthNegative = {-32,4,90};
+    Date month30day31 = {31,4,2020};
+    Date month31day31 = {31,1,2020};
+    Date wrongMonth = {31,13,2020};
+    Date normalDate = {13,6,2020};
+    Date nullDate = {0,0,0};
+
+    printf("Normal Date: %d\n", validateDate(normalDate));
+    printf("Leap Year: %d\n", validateDate(leapYearDate));
+    printf("Normal February Wrong: %d\n", validateDate(normalWFebDate));
+    printf("Normal February Right: %d\n", validateDate(normalRFebDate));
+    printf("Day above 31: %d\n", validateDate(above31));
+    printf("Negative Year: %d\n", validateDate(yearNegative));
+    printf("Negative Day: %d\n", validateDate(dayNegative));
+    printf("Negative Month: %d\n", validateDate(monthNegative));
+    printf("Day 31 with April: %d\n", validateDate(month30day31));
+    printf("Day 31 with January: %d\n", validateDate(month31day31));
+    printf("Wrong month: %d\n", validateDate(wrongMonth));
+    printf("0-0-0 Date: %d\n", validateDate(nullDate));
+
+    printf("\nMobile 017: %d\n", validateMobile("01737653498"));
+    printf("\nMobile 010: %d\n", validateMobile("01037653498"));
+    printf("\nMobile 012: %d\n", validateMobile("01237653498"));
+    printf("\nMobile 011: %d\n", validateMobile("01137653498"));
+    printf("\nMobile 015: %d\n", validateMobile("01537653498"));
+    printf("\nMobile Wrong Length: %d\n", validateMobile("0103653498"));
+
+```
+
 ## Examples
 ### main.c example
 ``` c
