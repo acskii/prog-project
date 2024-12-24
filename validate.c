@@ -15,24 +15,56 @@ int validateReserveId(int reservationId) {
     return ((reservationId > 99999 && reservationId <= 999999) ? 1 : 0);
 }
 
-int validateReserseStatus(char* status) {
+int validateReserveStatus(char* status) {
     // Check if status input is either "confirmed" or "unconfirmed"
     int length = strlen(status);
     
     if (length >= 9 && length <= 11) {
 
-        char* clean = status;
+        char clean[length+1];
 
         int i;
         for (i = 0; i < length; i++) {
-            clean[i] = tolower(clean[i]);
+            clean[i] = tolower(status[i]);
         }
+        clean[i] = '\0';
 
         // Valid status
-        return ((strcmp(clean, "confirmed") == 0) || (strcmp(clean, "unconfirmed") == 0));
+        return (((strcmp(clean, "confirmed") == 0) || (strcmp(clean, "unconfirmed") == 0)) ? 1 : 0);
     }
     // Invalid
     return 0;
+}
+
+int validateRoomStatus(char* status) {
+    // Check if status input is either "confirmed" or "unconfirmed"
+    int length = strlen(status);
+    
+    if (length == 8 || length == 9) {
+
+        char clean[length+1];
+
+        int i;
+        for (i = 0; i < length; i++) {
+            clean[i] = tolower(status[i]);
+        }
+        clean[i] = '\0';
+        // Valid status
+        return (((strcmp(clean, "available") == 0) || (strcmp(clean, "reserved") == 0)) ? 1 : 0);
+    }
+    // Invalid
+    return 0;
+}
+
+int validateNationalId(char* nationalId) {
+    // Check if national ID has sufficient length
+    return ((strlen(nationalId) == 14) ? 1 : 0);
+}
+
+int validateRoomCategory(char* category) {
+    // Check that no spaces are inbetween category charactors
+    char* space = strchr(category, ' ');
+    return ((space == NULL) ? 1 : 0);
 }
 
 int validateDate(Date date) {
@@ -102,34 +134,33 @@ int validateMobile(char* mobile) {
     return 0;
 }
 
-// WORK IN PROGRESS
-// int validateEmail(char* email) {
-// 	char* at = strchr(email, '@');
-//     char* dot;
+int validateEmail(char* email) {
+	char* at = strchr(email, '@');
+    char* dot;
 
-//     // Check if there is an '@' and it's not the first character
-//     if (!at || at == email) {
-//         return 0;
-//     }
+    // Check if there is an '@' and it's not the first character
+    if (!at || at == email) {
+        return 0;
+    }
 
-//     // Check if there is a '.' after the '@'
-//     dot = strchr(at, '.');
-//     if (!dot || dot == at + 1) {
-//         return 0;
-//     }
+    // Check if there is a '.' after the '@'
+    dot = strchr(at, '.');
+    if (!dot || dot == at + 1 || *(dot + 1) == '.') {
+        return 0;
+    }
 
-//     // Check that there are at least two characters after the last '.'
-//     if (strlen(dot + 1) < 2) {
-//         return 0;
-//     }
+    // Check that there are at least two characters after the last '.'
+    if (strlen(dot + 1) < 2) {
+        return 0;
+    }
 
-//     // Check for invalid characters
-//     int i;
-//     for (i = 0; i < strlen(email); i++) {
-//         if (!isalnum(email[i]) && email[i] != '@' && email[i] != '.' && email[i] != '-' && email[i] != '_') {
-//             return 0;
-//         }
-//     }
+    // Check for invalid characters
+    int i;
+    for (i = 0; i < strlen(email); i++) {
+        if (!isalnum(email[i]) && email[i] != '@' && email[i] != '.' && email[i] != '-' && email[i] != '_') {
+            return 0;
+        }
+    }
 
-//     return 1;
-// }
+    return 1;
+}
