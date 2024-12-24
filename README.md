@@ -10,7 +10,11 @@ I will post my contributions here related to the Final Project for Programming-1
 > Try these test cases, and add your own test cases as well
 > If any of these test cases fail, please inform me / suggest a solution yourself
 ```c
- // Test cases for date validation
+#include <stdio.h>
+#include "types.h"
+#include "validate.h"
+    
+void main() {    
     Date leapYearDate = {29,2,2024};
     Date normalWFebDate = {29,2,2023};
     Date normalRFebDate = {28,2,2023};
@@ -24,6 +28,7 @@ I will post my contributions here related to the Final Project for Programming-1
     Date normalDate = {13,6,2020};
     Date nullDate = {0,0,0};
 
+    printf("\nDate Test Cases:\n");
     printf("Normal Date: %d\n", validateDate(normalDate));
     printf("Leap Year: %d\n", validateDate(leapYearDate));
     printf("Normal February Wrong: %d\n", validateDate(normalWFebDate));
@@ -37,13 +42,53 @@ I will post my contributions here related to the Final Project for Programming-1
     printf("Wrong month: %d\n", validateDate(wrongMonth));
     printf("0-0-0 Date: %d\n", validateDate(nullDate));
 
-    printf("\nMobile 017: %d\n", validateMobile("01737653498"));
-    printf("\nMobile 010: %d\n", validateMobile("01037653498"));
-    printf("\nMobile 012: %d\n", validateMobile("01237653498"));
-    printf("\nMobile 011: %d\n", validateMobile("01137653498"));
-    printf("\nMobile 015: %d\n", validateMobile("01537653498"));
-    printf("\nMobile Wrong Length: %d\n", validateMobile("0103653498"));
+    printf("\nMobile Test Cases:\n");
+    printf("Mobile 017: %d\n", validateMobile("01737653498"));
+    printf("Mobile 010: %d\n", validateMobile("01037653498"));
+    printf("Mobile 012: %d\n", validateMobile("01237653498"));
+    printf("Mobile 011: %d\n", validateMobile("01137653498"));
+    printf("Mobile 015: %d\n", validateMobile("01537653498"));
+    printf("Mobile Wrong Length: %d\n", validateMobile("0103653498"));
 
+    printf("\nStatus Test Cases:\n");
+    printf("Room Status 'Available': %d\n", validateRoomStatus("Available"));
+    printf("Room Status 'avAiLable': %d\n", validateRoomStatus("avAiLable"));
+    printf("Room Status 'Availabl': %d\n", validateRoomStatus("Availabl"));
+    
+    printf("Room Status 'Reserved': %d\n", validateRoomStatus("Reserved"));
+    printf("Room Status 'reSerVed': %d\n", validateRoomStatus("reSerVed"));
+    printf("Room Status 'reserced': %d\n", validateRoomStatus("reserced"));
+    
+    printf("Reservation Status 'Confirmed': %d\n", validateReserveStatus("Confirmed"));
+    printf("Reservation Status 'UnConfirmed': %d\n", validateReserveStatus("UnConfirmed"));
+    printf("Reservation Status 'nonsense': %d\n", validateReserveStatus("nonsense"));
+    printf("Reservation Status 'confirm': %d\n", validateReserveStatus("confirm"));
+
+    printf("\nOthers:\n");
+    printf("Correct National ID: %d\n", validateNationalId("90022800157646"));
+    printf("Incorrect National ID: %d\n", validateNationalId("90022800646"));
+    printf("Room Category No Spaces: %d\n", validateRoomCategory("LakeView"));
+    printf("Room Category With Spaces: %d\n", validateRoomCategory("Lake View"));
+
+
+    char* testEmails[] = {
+        "example@example.com",
+        "example@.com",
+        "example@com",
+        "example.com",
+        "@example.com",
+        "example@sub.example.com",
+        "invalid_email@domain,com",
+        "invalid@domain..com",
+        "valid_email123@domain-name.com",
+        NULL
+    };
+
+    printf("\nEmail Validation Results:\n");
+    for (int i = 0; testEmails[i] != NULL; i++) {
+        printf("%s -> %s\n", testEmails[i], validateEmail(testEmails[i]) ? "Valid" : "Invalid");
+    }
+}
 ```
 
 ## Examples
