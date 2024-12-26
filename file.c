@@ -236,7 +236,7 @@ int writeRooms(char* fileName, Room* rooms, int num) {
 
         fprintf(
             fp,
-            "%d,%s,%s,%d",
+            "%d %s %s %d",
             rooms[i].number,
             statusStr,
             rooms[i].category,
